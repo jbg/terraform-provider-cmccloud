@@ -5,9 +5,12 @@ PKG_NAME=cmccloud
 
 default: build
 
-build: fmtcheck 
+localbuild: fmtcheck 
 	go build -o terraform-provider-cmccloud_v0.1.0
 	cp terraform-provider-cmccloud_v0.1.0 /root/terraform/terraform-provider-cmccloud/.terraform/plugins/github.com/cmc-cloud/cmccloud/0.1.0/linux_amd64
+
+build: fmtcheck 
+	go install
 
 test: fmtcheck
 	go test -i $(TEST) || exit 1

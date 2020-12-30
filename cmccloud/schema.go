@@ -53,7 +53,7 @@ func ruleSchema(cidrName string) map[string]*schema.Schema {
 			Type: schema.TypeSet,
 			Elem: &schema.Schema{
 				Type:         schema.TypeString,
-				ValidateFunc: validateIpCidrRange,
+				ValidateFunc: validateIPCidrRange,
 			},
 			Optional: true,
 		},
@@ -72,12 +72,12 @@ func directRuleSchema() map[string]*schema.Schema {
 		},
 		"src": {
 			Type:         schema.TypeString,
-			ValidateFunc: validateIpCidrRange,
+			ValidateFunc: validateIPCidrRange,
 			Optional:     true,
 		},
 		"dst": {
 			Type:         schema.TypeString,
-			ValidateFunc: validateIpAddress,
+			ValidateFunc: validateIPAddress,
 			Optional:     true,
 		},
 		"action": {
@@ -218,7 +218,7 @@ func networkSchema() map[string]*schema.Schema {
 			Type:         schema.TypeString,
 			Required:     true,
 			ForceNew:     true,
-			ValidateFunc: validateIpAddress,
+			ValidateFunc: validateIPAddress,
 		},
 		"netmask": {
 			Type:         schema.TypeString,
@@ -321,7 +321,7 @@ func vpcSchema() map[string]*schema.Schema {
 			StateFunc: func(val interface{}) string {
 				return strings.TrimSpace(val.(string))
 			},
-			ValidateFunc: validateIpCidrRange,
+			ValidateFunc: validateIPCidrRange,
 		},
 		"state": {
 			Type:     schema.TypeString,
