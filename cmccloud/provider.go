@@ -32,10 +32,9 @@ func Provider() terraform.ResourceProvider {
 			"cmccloud_firewall_vpc":    resourceCMCCloudFirewallVPC(),
 			"cmccloud_firewall_direct": resourceCMCCloudFirewallDirect(),
 			"cmccloud_network_server":  resourceCMCCloudNetworkServer(),
-			// "cmccloud_firewall_direct": resourceCMCCloudFIrewallDirect(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
-			"cmccloud_images": datasourceCMCCloudImages(),
+			//"cmccloud_images": datasourceCMCCloudImages(),
 		},
 	}
 	p.ConfigureFunc = func(d *schema.ResourceData) (interface{}, error) {

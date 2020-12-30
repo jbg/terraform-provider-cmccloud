@@ -1,7 +1,7 @@
 terraform {
     required_providers {
         cmccloud = {
-            source  = "github.com/cmccloud/cmccloud"
+            source  = "github.com/cmc-cloud/cmccloud"
 			version = "0.1.0"
         }
     }
@@ -9,7 +9,7 @@ terraform {
 
 provider "cmccloud" {
     api_endpoint = "https://api.cloud.cmctelecom.vn/ver2"
-    api_key = "vTMSG7F9mFKnNRYIz8eA9N9XrHJ4zP"
+    api_key = "xxxx"
 }
 
 

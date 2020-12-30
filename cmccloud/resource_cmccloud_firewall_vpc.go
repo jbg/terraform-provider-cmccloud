@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/cmccloud/gocmcapi"
+	"github.com/cmc-cloud/gocmcapi"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 

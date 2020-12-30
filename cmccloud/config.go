@@ -3,7 +3,7 @@ package cmccloud
 import (
 	"log"
 
-	"github.com/cmccloud/gocmcapi"
+	"github.com/cmc-cloud/gocmcapi"
 )
 
 // Config object
