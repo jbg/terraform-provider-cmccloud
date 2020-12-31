@@ -58,6 +58,6 @@ func resourceCMCCloudFloatingIPDelete(d *schema.ResourceData, meta interface{}) 
 }
 
 func resourceCMCCloudFloatingIPImport(d *schema.ResourceData, meta interface{}) ([]*schema.ResourceData, error) {
-	resourceCMCCloudFloatingIPRead(d, meta)
-	return []*schema.ResourceData{d}, nil
+	err := resourceCMCCloudFloatingIPRead(d, meta)
+	return []*schema.ResourceData{d}, err
 }

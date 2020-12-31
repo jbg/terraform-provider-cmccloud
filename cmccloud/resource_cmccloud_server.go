@@ -94,7 +94,7 @@ func resourceCMCCloudServerRead(d *schema.ResourceData, meta interface{}) error 
 			isPrivate = true
 		}
 	}
-	d.Set("enable_private_network", isPrivate)
+	_ = d.Set("enable_private_network", isPrivate)
 	return nil
 }
 
