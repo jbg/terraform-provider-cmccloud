@@ -29,11 +29,14 @@ jobs:
         id: import_gpg
         uses: paultyng/ghaction-import-gpg@v2.1.0        
         with:
-          git_user_signingkey: true
-          git_commit_gpgsign: true
+          git-user-signingkey: true
+          git-commit-gpgsign: true
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }} 
-          PASSPHRASE: ${{ secrets.PASSPHRASE }}  
+          PASSPHRASE: ${{ secrets.PASSPHRASE }}
+          
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
         with:
