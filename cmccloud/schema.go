@@ -23,16 +23,7 @@ func ruleSchema(cidrName string) map[string]*schema.Schema {
 			Optional: true,
 			Default:  "allow",
 			DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-				// if old == "" {
-				// 	old = "allow"
-				// }
-				// if new == "" {
-				// 	new = "allow"
-				// }
-				if strings.ToLower(old) == strings.ToLower(new) {
-					return true
-				}
-				return false
+				return strings.ToLower(old) == strings.ToLower(new)
 			},
 			StateFunc: func(val interface{}) string {
 				if val == nil || val.(string) == "" {

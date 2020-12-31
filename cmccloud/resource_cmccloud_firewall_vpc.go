@@ -41,11 +41,11 @@ func resourceCMCCloudFirewallVPCRead(d *schema.ResourceData, meta interface{}) e
 		return fmt.Errorf("Error retrieving FirewallVPC %s: %v", d.Id(), err)
 	}
 
-	d.Set("name", firewallVPC.Name)
-	d.Set("description", firewallVPC.Description)
-	d.Set("vpc_id", firewallVPC.VPCID)
-	d.Set("inbound_rule", convertFirewallRule(firewallVPC.InboundRules))
-	d.Set("outbound_rule", convertFirewallRule(firewallVPC.OutboundRules))
+	_ = d.Set("name", firewallVPC.Name)
+	_ = d.Set("description", firewallVPC.Description)
+	_ = d.Set("vpc_id", firewallVPC.VPCID)
+	_ = d.Set("inbound_rule", convertFirewallRule(firewallVPC.InboundRules))
+	_ = d.Set("outbound_rule", convertFirewallRule(firewallVPC.OutboundRules))
 	return nil
 }
 

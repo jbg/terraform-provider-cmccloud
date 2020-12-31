@@ -39,11 +39,11 @@ func resourceCMCCloudVPCRead(d *schema.ResourceData, meta interface{}) error {
 		return fmt.Errorf("Error retrieving VPC %s: %v", d.Id(), err)
 	}
 
-	d.Set("name", vpc.Name)
-	d.Set("description", vpc.Description)
-	d.Set("state", vpc.State)
-	d.Set("region", strings.ToLower(vpc.RegionName))
-	d.Set("cidr", vpc.Cidr)
+	_ = d.Set("name", vpc.Name)
+	_ = d.Set("description", vpc.Description)
+	_ = d.Set("state", vpc.State)
+	_ = d.Set("region", strings.ToLower(vpc.RegionName))
+	_ = d.Set("cidr", vpc.Cidr)
 	return nil
 }
 
@@ -70,6 +70,6 @@ func resourceCMCCloudVPCDelete(d *schema.ResourceData, meta interface{}) error {
 }
 
 func resourceCMCCloudVPCImport(d *schema.ResourceData, meta interface{}) ([]*schema.ResourceData, error) {
-	resourceCMCCloudVPCRead(d, meta)
-	return []*schema.ResourceData{d}, nil
+	err := resourceCMCCloudVPCRead(d, meta)
+	return []*schema.ResourceData{d}, err
 }
