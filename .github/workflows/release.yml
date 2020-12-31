@@ -30,11 +30,11 @@ jobs:
         with:
           git-user-signingkey: true
           git-commit-gpgsign: true 
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
+          gpg-private-key: ${{ goreleaser.GPG_PRIVATE_KEY }}
+          passphrase: ${{ goreleaser.PASSPHRASE }}
         env:
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }} 
-          PASSPHRASE: ${{ secrets.PASSPHRASE }}
+          GPG_PRIVATE_KEY: ${{ goreleaser.GPG_PRIVATE_KEY }} 
+          PASSPHRASE: ${{ goreleaser.PASSPHRASE }}
           
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
