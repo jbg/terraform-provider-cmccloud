@@ -1,8 +1,6 @@
 package cmccloud
 
 import (
-	"fmt"
-
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
@@ -31,6 +29,7 @@ func setToStringArray(items *schema.Set) []string {
 	return flatten
 }
 
+/*
 func interfaceToString(items []interface{}) []string {
 	flatten := make([]string, len(items))
 
@@ -39,3 +38,4 @@ func interfaceToString(items []interface{}) []string {
 	}
 	return flatten
 }
+*/

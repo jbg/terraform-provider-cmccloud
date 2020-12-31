@@ -179,24 +179,10 @@ func resourceCMCCloudServerDelete(d *schema.ResourceData, meta interface{}) erro
 	if err != nil {
 		return fmt.Errorf("Error delete cloud server: %v", err)
 	}
-	/*var rootDiskID string
-	for _, v := range server.AttachedVolumes {
-		if v.AttachedType == attachTypeRootDisk {
-			rootDiskID = v.ID
-		}
-	}
-	err = client.Server.Delete(context.Background(), d.Id())
-	if err != nil {
-		return fmt.Errorf("Error delete cloud server %v", err)
-	}
-	err = client.Volume.Delete(context.Background(), rootDiskID)
-	if err != nil {
-		return fmt.Errorf("Error deleting rootdisk of cloud server %s: %v", d.Id(), err)
-	} */
 	return nil
 }
 
 func resourceCMCCloudServerImport(d *schema.ResourceData, meta interface{}) ([]*schema.ResourceData, error) {
-	resourceCMCCloudServerRead(d, meta)
-	return []*schema.ResourceData{d}, nil
+	err := resourceCMCCloudServerRead(d, meta)
+	return []*schema.ResourceData{d}, err
 }

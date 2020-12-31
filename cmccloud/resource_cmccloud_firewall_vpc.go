@@ -31,46 +31,7 @@ func resourceCMCCloudFirewallVPCCreate(d *schema.ResourceData, meta interface{})
 	}
 	id := taskStatus.ResultID
 	d.SetId(id)
-
-	// Get inbound_rules
-	/*number := 0
-	if v, ok := d.GetOk("inbound_rule"); ok {
-		number++
-		rules := v.([]interface{})
-		for _, rawRule := range rules {
-			rule := rawRule.(map[string]interface{})
-			action := "allow"
-			if v, ok := rule["allow"]; ok {
-				action = v.(string)
-			}
-			portRange := ""
-			if v, ok := rule["port_range"]; ok {
-				portRange = v.(string)
-			}
-			cidrs := strings.Join(setToStringArray(rule["cidrs"].(*schema.Set)), ",")
-			client.FirewallVPC.CreateRule(id, number, cidrs, action, rule["protocol"].(string), "ingress", portRange)
-		}
-	}
-
-	maxNumber := 0
-	if v, ok := d.GetOk("inbound_rule"); ok {
-		err := saveRules(client, id, v, "ingress", maxNumber)
-		if err != "" {
-			return fmt.Errorf(err)
-		}
-		maxNumber += len(v.([]interface{}))
-	}
-
-	if v, ok := d.GetOk("outbound_rule"); ok {
-		err := saveRules(client, id, v, "ingress", maxNumber)
-		if err != "" {
-			return fmt.Errorf(err)
-		}
-		maxNumber += len(v.([]interface{}))
-	}*/
 	return resourceCMCCloudFirewallVPCUpdate(d, meta)
-
-	//return resourceCMCCloudFirewallVPCRead(d, meta)
 }
 
 func resourceCMCCloudFirewallVPCRead(d *schema.ResourceData, meta interface{}) error {
@@ -121,114 +82,9 @@ func resourceCMCCloudFirewallVPCUpdate(d *schema.ResourceData, meta interface{})
 			return fmt.Errorf("Error when update rules: %v", err)
 		}
 	}
-	/*
-		errors := validateRules(d, meta)
-		if errors != nil && len(errors) > 0 {
-			return fmt.Errorf("Error when validate rules: %v", errors)
-		}
-
-		maxNumber, err := getCurrentMaxNumber(d, meta)
-		if err != nil {
-			return fmt.Errorf("Error when getting list of rules of this firewall: %v", err)
-		}
-		err = client.FirewallVPC.DeleteAllRules(id)
-		if err != nil {
-			return fmt.Errorf("Error when delete all previous rules: %v", err)
-		}
-		if d.HasChange("inbound_rule") {
-			if v, ok := d.GetOk("inbound_rule"); ok {
-				err := saveRules(client, id, v, "ingress", maxNumber)
-				if err != "" {
-					return fmt.Errorf(err)
-				}
-				maxNumber += len(v.([]interface{}))
-			}
-		}
-		if d.HasChange("outbound_rule") {
-			if v, ok := d.GetOk("outbound_rule"); ok {
-				err := saveRules(client, id, v, "egress", maxNumber)
-				if err != "" {
-					return fmt.Errorf(err)
-				}
-			}
-		} */
 	return resourceCMCCloudFirewallVPCRead(d, meta)
 }
 
-func validateRules(d *schema.ResourceData, meta interface{}) []string {
-	client := meta.(*CombinedConfig).goCMCClient()
-	inboundJSON := "[]"
-	outboundJSON := "[]"
-	if v, ok := d.GetOk("inbound_rule"); ok {
-		res, err := json.Marshal(flatternFirewallRules(v.([]interface{})))
-		if err != nil {
-			return []string{fmt.Sprintf("Error when validate rules: %v, %+v", err, v)}
-		}
-		inboundJSON = string(res)
-	}
-	if v, ok := d.GetOk("outbound_rule"); ok {
-		res, err := json.Marshal(flatternFirewallRules(v.([]interface{})))
-		if err != nil {
-			return []string{fmt.Sprintf("Error when validate rules: %v, %+v", err, v)}
-		}
-		outboundJSON = string(res)
-	}
-	errors, err := client.FirewallVPC.ValidateRules(inboundJSON, outboundJSON)
-	if err != nil {
-		return []string{fmt.Sprintf("Error when validate rules: %v", err)}
-	}
-	if errors != nil && len(errors) > 0 {
-		return errors
-	}
-	return nil
-}
-
-func saveRules(client *gocmcapi.Client, firewallID string, v interface{}, ruleType string, startNumber int) string {
-	rules := v.([]interface{})
-	number := startNumber
-	for _, rawRule := range rules {
-		number++
-		rule := rawRule.(map[string]interface{})
-		action := "allow"
-		if v, ok := rule["allow"]; ok {
-			action = v.(string)
-		}
-		portRange := ""
-		if v, ok := rule["port_range"]; ok {
-			portRange = v.(string)
-		}
-		cidrs := strings.Join(setToStringArray(rule["cidrs"].(*schema.Set)), ",")
-		if ruleID, ok := rule["id"]; ok && ruleID != "" {
-			_, err := client.FirewallVPC.UpdateRule(ruleID.(string), number, cidrs, action, rule["protocol"].(string), ruleType, portRange)
-			if err != nil {
-				return fmt.Sprintf("Error when update firewall with id = %s: %v", ruleID, err)
-			}
-		} else {
-			_, err := client.FirewallVPC.CreateRule(firewallID, number, cidrs, action, rule["protocol"].(string), ruleType, portRange)
-			if err != nil {
-				return fmt.Sprintf("Error when creating firewall with info = %v: %v", rule, err)
-			}
-		}
-	}
-	return ""
-}
-func getCurrentMaxNumber(d *schema.ResourceData, meta interface{}) (int, error) {
-	client := meta.(*CombinedConfig).goCMCClient()
-	rules, err := client.FirewallVPC.GetRules(d.Id())
-
-	if err != nil {
-		return 0, err
-	}
-	maxNumber := 0
-	for _, rawRule := range rules {
-		rule := rawRule.(map[string]interface{})
-		number := int(rule["number"].(float64))
-		if maxNumber < number {
-			maxNumber = number
-		}
-	}
-	return maxNumber, nil
-}
 func resourceCMCCloudFirewallVPCDelete(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*CombinedConfig).goCMCClient()
 	_, err := client.FirewallVPC.Delete(d.Id())
@@ -240,8 +96,8 @@ func resourceCMCCloudFirewallVPCDelete(d *schema.ResourceData, meta interface{})
 }
 
 func resourceCMCCloudFirewallVPCImport(d *schema.ResourceData, meta interface{}) ([]*schema.ResourceData, error) {
-	resourceCMCCloudFirewallVPCRead(d, meta)
-	return []*schema.ResourceData{d}, nil
+	err := resourceCMCCloudFirewallVPCRead(d, meta)
+	return []*schema.ResourceData{d}, err
 }
 
 func convertFirewallRule(rules []gocmcapi.FirewallVPCRule) []map[string]interface{} {

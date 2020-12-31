@@ -167,6 +167,6 @@ func resourceCMCCloudVolumeDelete(d *schema.ResourceData, meta interface{}) erro
 }
 
 func resourceCMCCloudVolumeImport(d *schema.ResourceData, meta interface{}) ([]*schema.ResourceData, error) {
-	resourceCMCCloudVolumeRead(d, meta)
-	return []*schema.ResourceData{d}, nil
+	err := resourceCMCCloudVolumeRead(d, meta)
+	return []*schema.ResourceData{d}, err
 }

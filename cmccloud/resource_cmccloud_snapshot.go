@@ -85,6 +85,6 @@ func resourceCMCCloudSnapshotDelete(d *schema.ResourceData, meta interface{}) er
 }
 
 func resourceCMCCloudSnapshotImport(d *schema.ResourceData, meta interface{}) ([]*schema.ResourceData, error) {
-	resourceCMCCloudSnapshotRead(d, meta)
-	return []*schema.ResourceData{d}, nil
+	err := resourceCMCCloudSnapshotRead(d, meta)
+	return []*schema.ResourceData{d}, err
 }

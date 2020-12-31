@@ -141,6 +141,6 @@ func resourceCMCCloudNetworkDelete(d *schema.ResourceData, meta interface{}) err
 }
 
 func resourceCMCCloudNetworkImport(d *schema.ResourceData, meta interface{}) ([]*schema.ResourceData, error) {
-	resourceCMCCloudNetworkRead(d, meta)
-	return []*schema.ResourceData{d}, nil
+	err := resourceCMCCloudNetworkRead(d, meta)
+	return []*schema.ResourceData{d}, err
 }

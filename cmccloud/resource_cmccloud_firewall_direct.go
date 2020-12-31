@@ -39,10 +39,10 @@ func resourceCMCCloudFirewallDirectRead(d *schema.ResourceData, meta interface{}
 		if err != nil {
 			return fmt.Errorf("Error receiving FirewallDirect %s: %v", d.Id(), err)
 		}
-		d.Set("server_id", FirewallDirect.ServerID)
-		d.Set("ip_address", FirewallDirect.IPAddress)
-		d.Set("inbound_rule", convertFirewallDirectRule(FirewallDirect.InboundRules))
-		d.Set("outbound_rule", convertFirewallDirectRule(FirewallDirect.OutboundRules))
+		_ = d.Set("server_id", FirewallDirect.ServerID)
+		_ = d.Set("ip_address", FirewallDirect.IPAddress)
+		_ = d.Set("inbound_rule", convertFirewallDirectRule(FirewallDirect.InboundRules))
+		_ = d.Set("outbound_rule", convertFirewallDirectRule(FirewallDirect.OutboundRules))
 	} else {
 		d.SetId("")
 		return fmt.Errorf("Error get FirewallDirect: invalid id %v", id)
@@ -97,8 +97,8 @@ func resourceCMCCloudFirewallDirectDelete(d *schema.ResourceData, meta interface
 }
 
 func resourceCMCCloudFirewallDirectImport(d *schema.ResourceData, meta interface{}) ([]*schema.ResourceData, error) {
-	resourceCMCCloudFirewallDirectRead(d, meta)
-	return []*schema.ResourceData{d}, nil
+	err := resourceCMCCloudFirewallDirectRead(d, meta)
+	return []*schema.ResourceData{d}, err
 }
 
 func convertFirewallDirectRule(rules []gocmcapi.FirewallDirectRule) []map[string]interface{} {
