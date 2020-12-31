@@ -24,13 +24,23 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.14
-
+        
       - name: Import GPG key
         id: import_gpg
         uses: paultyng/ghaction-import-gpg@v2.1.0
+        run: |
+            mkdir -p ~/.gnupg/
+            printf "$GPG_SIGNING_KEY" | base64 --decode > ~/.gnupg/private.key
+            gpg --import ~/.gnupg/private.key
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_SIGNING_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           PASSPHRASE: ${{ secrets.PASSPHRASE }}
+        with:
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git-user-signingkey: true
+          git-commit-gpgsign: true
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
