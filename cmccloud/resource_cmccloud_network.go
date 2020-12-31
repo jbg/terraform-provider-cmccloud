@@ -42,16 +42,16 @@ func resourceCMCCloudNetworkRead(d *schema.ResourceData, meta interface{}) error
 		return fmt.Errorf("Error retrieving Network %s: %v", d.Id(), err)
 	}
 
-	d.Set("name", network.Name)
-	d.Set("description", network.Description)
-	d.Set("gateway", network.Gateway)
-	d.Set("netmask", network.Netmask)
-	d.Set("cidr", network.Cidr)
-	d.Set("state", network.State)
-	d.Set("type", network.Type)
-	d.Set("firewall_id", fixFirewallID(network.FirewallID))
-	d.Set("vpc_id", network.VPCID)
-	d.Set("server_ids", stringArrayToSet(network.ServerIDs))
+	_ = d.Set("name", network.Name)
+	_ = d.Set("description", network.Description)
+	_ = d.Set("gateway", network.Gateway)
+	_ = d.Set("netmask", network.Netmask)
+	_ = d.Set("cidr", network.Cidr)
+	_ = d.Set("state", network.State)
+	_ = d.Set("type", network.Type)
+	_ = d.Set("firewall_id", fixFirewallID(network.FirewallID))
+	_ = d.Set("vpc_id", network.VPCID)
+	_ = d.Set("server_ids", stringArrayToSet(network.ServerIDs))
 
 	return nil
 }

@@ -53,11 +53,11 @@ func resourceCMCCloudSnapshotRead(d *schema.ResourceData, meta interface{}) erro
 		return fmt.Errorf("Error retrieving Snapshot %s: %v", d.Id(), err)
 	}
 
-	d.Set("name", snapshot.Name)
-	d.Set("size", snapshot.Size)
-	d.Set("state", snapshot.State)
-	d.Set("created", snapshot.Created)
-	d.Set("volume_id", snapshot.VolumeID)
+	_ = d.Set("name", snapshot.Name)
+	_ = d.Set("size", snapshot.Size)
+	_ = d.Set("state", snapshot.State)
+	_ = d.Set("created", snapshot.Created)
+	_ = d.Set("volume_id", snapshot.VolumeID)
 	return nil
 }
 

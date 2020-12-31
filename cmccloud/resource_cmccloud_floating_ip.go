@@ -38,11 +38,11 @@ func resourceCMCCloudFloatingIPRead(d *schema.ResourceData, meta interface{}) er
 		return fmt.Errorf("Error retrieving FloatingIP %s: %v", d.Id(), err)
 	}
 
-	d.Set("vpc_id", FloatingIP.VPCID)
-	d.Set("ip_address", FloatingIP.IPAddress)
-	d.Set("is_source_nat", FloatingIP.IsSourceNat)
-	d.Set("is_static_nat", FloatingIP.IsStaticNat)
-	d.Set("state", FloatingIP.State)
+	_ = d.Set("vpc_id", FloatingIP.VPCID)
+	_ = d.Set("ip_address", FloatingIP.IPAddress)
+	_ = d.Set("is_source_nat", FloatingIP.IsSourceNat)
+	_ = d.Set("is_static_nat", FloatingIP.IsStaticNat)
+	_ = d.Set("state", FloatingIP.State)
 
 	return nil
 }

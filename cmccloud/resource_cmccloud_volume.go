@@ -72,13 +72,13 @@ func resourceCMCCloudVolumeRead(d *schema.ResourceData, meta interface{}) error 
 		return fmt.Errorf("Error retrieving Volume %s: %v", d.Id(), err)
 	}
 
-	d.Set("name", volume.Name)
-	d.Set("size", volume.Size)
-	d.Set("type", volume.Type)
-	d.Set("region", strings.ToLower(volume.Region))
-	d.Set("state", volume.State)
-	d.Set("created", volume.Created)
-	d.Set("server_id", volume.ServerID)
+	_ = d.Set("name", volume.Name)
+	_ = d.Set("size", volume.Size)
+	_ = d.Set("type", volume.Type)
+	_ = d.Set("region", strings.ToLower(volume.Region))
+	_ = d.Set("state", volume.State)
+	_ = d.Set("created", volume.Created)
+	_ = d.Set("server_id", volume.ServerID)
 	return nil
 }
 

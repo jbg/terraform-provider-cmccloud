@@ -7,6 +7,7 @@ require (
 	github.com/cmc-cloud/gocmcapi v0.0.0-20201230035051-54fa9ab87e70
 	github.com/hashicorp/terraform-plugin-sdk v1.16.0
 	golang.org/x/tools v0.0.0-20201110201400-7099162a900a
+	github.com/kisielk/errcheck v1.4.0 // indirect
 )
 
 // uncomment this line when build from code
