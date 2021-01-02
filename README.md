@@ -10,7 +10,8 @@ CMC Cloud Terraform Provider
 Using The CMC Provider
 ---------------------
 
-```mkdir test
+```sh
+mkdir test
 cd test
 wget https://raw.githubusercontent.com/cmc-cloud/terraform-provider-cmccloud/main/examples/server.tf server.tf
 ```
@@ -18,7 +19,8 @@ wget https://raw.githubusercontent.com/cmc-cloud/terraform-provider-cmccloud/mai
 get your Cloud Api Key from https://portal.cloud.cmctelecom.vn/account-settings?to=settings
 change api_key to your own api key in server.tf
 
-```terraform init
+```sh
+terraform init
 ```
 
 Building The CMC CProvider
