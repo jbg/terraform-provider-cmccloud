@@ -1,7 +1,7 @@
 CMC Cloud Terraform Provider
 ==================
 
-- Website: https://www.terraform.io
+- Website: https://registry.terraform.io/providers/cmc-cloud/cmccloud/latest/docs
 - [![Gitter chat](https://badges.gitter.im/hashicorp-terraform/Lobby.png)](https://gitter.im/hashicorp-terraform/Lobby)
 - Mailing list: [Google Groups](http://groups.google.com/group/terraform-tool)
 
@@ -16,7 +16,7 @@ cd test
 wget https://raw.githubusercontent.com/cmc-cloud/terraform-provider-cmccloud/main/examples/server.tf server.tf
 ```
 
-get your Cloud Api Key from https://portal.cloud.cmctelecom.vn/account-settings?to=settings
+Get your Cloud Api Key from https://portal.cloud.cmctelecom.vn/account-settings?to=settings
 change api_key to your own api key in server.tf
 
 Now start to use cmc cloud terraform
@@ -26,7 +26,7 @@ terraform plan
 terraform apply
 ```
 
-Building The CMC CProvider
+Building The CMC Provider
 ---------------------
 
 Clone repository to: `$GOPATH/src/github.com/cmc-cloud/terraform-provider-cmccloud`
