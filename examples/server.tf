@@ -1,10 +1,10 @@
 terraform {
-    required_providers {
-        cmccloud = {
-            source  = "github.com/cmc-cloud/cmccloud"
-			version = "0.1.0"
-        }
+  required_providers {
+    cmccloud = {
+      source = "cmc-cloud/cmccloud"
+	  #source  = "github.com/cmc-cloud/cmccloud"
     }
+  }
 }
 
 provider "cmccloud" {
