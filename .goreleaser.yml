@@ -10,8 +10,8 @@ before:
 builds:
   - env:
       - CGO_ENABLED=0
-      - GPG_PRIVATE_KEY=${{ secrets.GPG_PRIVATE_KEY }}
-      - PASSPHRASE=${{ secrets.PASSPHRASE }}
+      # - GPG_PRIVATE_KEY=${{ secrets.GPG_PRIVATE_KEY }}
+      # - PASSPHRASE=${{ secrets.PASSPHRASE }}
     mod_timestamp: '{{ .CommitTimestamp }}'
     flags:
       - -trimpath

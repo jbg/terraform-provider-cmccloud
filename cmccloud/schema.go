@@ -342,14 +342,6 @@ func volumeSchema() map[string]*schema.Schema {
 			},
 			ValidateFunc: validation.StringInSlice([]string{"ssd", "hdd"}, true),
 		},
-		"state": {
-			Type:     schema.TypeString,
-			Computed: true,
-		},
-		"created": {
-			Type:     schema.TypeString,
-			Computed: true,
-		},
 		"region": {
 			Type:     schema.TypeString,
 			Optional: true,
@@ -363,6 +355,14 @@ func volumeSchema() map[string]*schema.Schema {
 			Type:         schema.TypeString,
 			Optional:     true,
 			ValidateFunc: validateUUID,
+		},
+		"state": {
+			Type:     schema.TypeString,
+			Computed: true,
+		},
+		"created": {
+			Type:     schema.TypeString,
+			Computed: true,
 		},
 	}
 }

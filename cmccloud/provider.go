@@ -13,13 +13,13 @@ func Provider() terraform.ResourceProvider {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Description: "The URL use for the CMC Cloud API",
-				DefaultFunc: schema.EnvDefaultFunc("CMC_CLOUD_API_ENDPOINT", "https://api.cloud.cmctelecom.vn"),
+				DefaultFunc: schema.EnvDefaultFunc("CMC_CLOUD_API_ENDPOINT", "https://api.cloud.cmctelecom.vn/ver2"),
 			},
 			"api_key": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Description: "API key get from account settings in https://portal.cloud.cmctelecom.vn",
-				DefaultFunc: schema.EnvDefaultFunc("CMC_CLOUD_PASSWORD", nil),
+				DefaultFunc: schema.EnvDefaultFunc("CMC_CLOUD_API_KEY", nil),
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{

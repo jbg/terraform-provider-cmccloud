@@ -1,0 +1,49 @@
+<% wrap_layout :inner do %>
+  <% content_for :sidebar do %>
+    <div class="docs-sidebar hidden-print affix-top" role="complementary">
+      <ul class="nav docs-sidenav">
+        <li<%= sidebar_current("docs-home") %>>
+          <a href="/docs/providers/index.html">All Providers</a>
+        </li>
+
+        <li<%= sidebar_current("docs-cmccloud-index") %>>
+          <a href="/docs/providers/cmccloud/index.html">BizFly Cloud Provider</a>
+        </li>
+        <li<%= sidebar_current("docs-cmccloud-resource") %>>
+          <a href="#">Resources</a>
+          <ul class="nav nav-visible">
+              <li<%= sidebar_current("docs-cmccloud-resource-server") %>>
+                <a href="/docs/providers/cmccloud/r/server.html">cmccloud_server</a>
+              </li>
+              <li<%= sidebar_current("docs-cmccloud-resource-volume") %>>
+                <a href="/docs/providers/cmccloud/r/volume.html">cmccloud_volume</a>
+              </li>
+              <li<%= sidebar_current("docs-cmccloud-resource-snapshot") %>>
+                <a href="/docs/providers/cmccloud/r/snapshot.html">cmccloud_snapshot</a>
+              </li>
+              <li<%= sidebar_current("docs-cmccloud-resource-vpc") %>>
+                <a href="/docs/providers/cmccloud/r/vpc.html">cmccloud_vpc</a>
+              </li>
+              <li<%= sidebar_current("docs-cmccloud-resource-network") %>>
+                <a href="/docs/providers/cmccloud/r/network.html">cmccloud_network</a>
+              </li>
+              <li<%= sidebar_current("docs-cmccloud-resource-network-server") %>>
+                <a href="/docs/providers/cmccloud/r/network_server.html">cmccloud_network_server</a>
+              </li>
+              <li<%= sidebar_current("docs-cmccloud-resource-floating-ip") %>>
+                <a href="/docs/providers/cmccloud/r/floating_ip.html">cmccloud_floating_ip</a>
+              </li>
+              <li<%= sidebar_current("docs-cmccloud-resource-firewall-vpc") %>>
+                <a href="/docs/providers/cmccloud/r/firewall_vpc.html">cmccloud_firewall_vpc</a>
+              </li>
+              <li<%= sidebar_current("docs-cmccloud-resource-firewall-direct") %>>
+                <a href="/docs/providers/cmccloud/r/firewall_direct.html">cmccloud_firewall_direct</a>
+              </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= yield %>
+  <% end %>

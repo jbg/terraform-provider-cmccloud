@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
@@ -31,7 +30,7 @@ func resourceCMCCloudNetworkServerCreate(d *schema.ResourceData, meta interface{
 	if err != nil {
 		return fmt.Errorf("Error creating Network: %s", err)
 	}
-	d.SetId(resource.PrefixedUniqueId(fmt.Sprintf("%s-%s", serverID, networkID)))
+	d.SetId(fmt.Sprintf("%s-%s", serverID, networkID))
 	return resourceCMCCloudNetworkRead(d, meta)
 }
 
@@ -77,6 +76,14 @@ func resourceCMCCloudNetworkServerDelete(d *schema.ResourceData, meta interface{
 }
 
 func resourceCMCCloudNetworkServerImport(d *schema.ResourceData, meta interface{}) ([]*schema.ResourceData, error) {
+	id := d.Id()
+	if len(strings.Split(id, ".")) == 2 {
+		_ = d.Set("server_id", strings.Split(id, ".")[0])
+		_ = d.Set("network_id", strings.Split(id, ".")[1])
+	} else {
+		d.SetId("")
+		return []*schema.ResourceData{d}, fmt.Errorf("Error when importing: invalid id %v", id)
+	}
 	err := resourceCMCCloudNetworkRead(d, meta)
 	return []*schema.ResourceData{d}, err
 }
