@@ -9,7 +9,7 @@ description: |-
 # cmccloud\_firewall_direct
 
 Provides a CMC Cloud Firewall Direct resource. This can be used to create,
-modify, and delete Firewall Direct. This firewall will be used for networks in Direct
+modify, and delete Firewall Direct. This firewall will be used for networks in Server
 
 ## Example Create a Firewall Direct
 

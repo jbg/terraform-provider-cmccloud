@@ -19,9 +19,16 @@ Use the navigation to the left to read about the available resources.
 
 ```hcl
 # Configure the CMC Cloud Provider
+terraform {
+	required_providers {
+		cmccloud = {
+			source = "cmc-cloud/cmccloud"
+		}
+	}
+}
 provider "cmccloud" {
     api_endpoint = "https://api.cloud.cmctelecom.vn/ver2"
-    api_key = "password"
+    api_key = "xxxx"
 }
 
 # Create a server
