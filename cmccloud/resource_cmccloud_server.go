@@ -35,7 +35,7 @@ func resourceCMCCloudServerCreate(d *schema.ResourceData, meta interface{}) erro
 		"gpu":                    d.Get("gpu").(int),
 		"image_type":             d.Get("image_type").(string),
 		"image_id":               d.Get("image_id").(string),
-		"region":                 d.Get("region").(string),
+		"region":                 strings.ToLower(d.Get("region").(string)),
 		"enable_private_network": d.Get("enable_private_network").(bool),
 		"auto_backup":            d.Get("auto_backup").(bool),
 		// "num_ip_public":          d.Get("num_ip_public").(int),
