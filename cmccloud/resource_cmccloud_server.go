@@ -76,7 +76,7 @@ func resourceCMCCloudServerRead(d *schema.ResourceData, meta interface{}) error 
 	_ = d.Set("gpu", server.GPU)
 	_ = d.Set("image_id", server.ImageID)
 	_ = d.Set("image_type", IfThenElse(server.ImageType == "", "image", server.ImageType))
-	_ = d.Set("region", server.RegionName)
+	_ = d.Set("region", strings.ToLower(server.RegionName))
 
 	_ = d.Set("name", server.Name)
 	_ = d.Set("display_name", server.DisplayName)
