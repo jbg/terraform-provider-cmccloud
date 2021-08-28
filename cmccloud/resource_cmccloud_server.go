@@ -85,16 +85,19 @@ func resourceCMCCloudServerRead(d *schema.ResourceData, meta interface{}) error 
 	_ = d.Set("bits", server.Bits)
 	_ = d.Set("state", server.State)
 	_ = d.Set("auto_backup", server.AutoBackup)
-	_ = d.Set("main_ip_address", server.MainIPAddress)
 	_ = d.Set("backup_schedule", server.BackupSchedule)
 
 	isPrivate := false
+	mainIP := ""
 	for _, nic := range server.Nics {
 		if nic.IsPrivate {
 			isPrivate = true
+		} else {
+			mainIP = nic.IP4Address
 		}
 	}
 	_ = d.Set("enable_private_network", isPrivate)
+	_ = d.Set("main_ip_address", mainIP)
 	return nil
 }
 
